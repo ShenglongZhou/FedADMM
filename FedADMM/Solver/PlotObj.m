@@ -1,4 +1,4 @@
-function  plotobj(obj1)
+function  PlotObj(obj1)
     figure('Renderer', 'painters', 'Position',[1100 400 370 320]);
     axes('Position', [0.14 0.14 0.83 0.8] ); 
     h1 = plot(1:length(obj1),obj1(1:end)); hold on
