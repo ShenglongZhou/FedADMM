@@ -2,7 +2,7 @@ clc; clear; close all;
 addpath(genpath(pwd));
 
 Prob = {'LinReg','LogReg'};
-prob  = Prob{2};
+prob  = Prob{1};
 
 m     = 100;
 switch prob 
@@ -19,6 +19,7 @@ switch prob
 
 end 
 
+k0          = 10;
 [A,b,dim,n] = DataGeneration(prob,m,n,var1,var2); 
-out         = FedADMM(dim,n,A,b,10,prob,pars);
-PlotObj(out.OBJ)
+out         = FedADMM(dim,n,A,b,k0,prob,pars);
+PlotObj(out.OBJ,k0)
