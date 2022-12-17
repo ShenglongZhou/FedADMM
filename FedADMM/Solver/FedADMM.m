@@ -94,7 +94,7 @@ for iter = 0 : maxit
     end
     
     if iter == 0
-        tol = min(tol,err/10);
+        tol = min(tol,0.2*err);
     end 
     
     OBJ(iter+1)   = fw;
@@ -141,14 +141,15 @@ function [m,tol,eps,m0,maxit,sigmai,sigma,wri,wrsig,funf,grad] = set_parameters(
    
     m       = length(dim);
     maxit   = 1e3*k0;    
-    tol     = 5e-5*n/sum(dim); 
+    tol     = 5e-3*n/m/sum(dim); 
     eps     = k0^2*ones(m,1);
     m0      = ceil(0.5*m);
     
     if isequal(prob,'LogReg') 
-       r0    = 0.05 + 0.01*(sum(dim)/n>=1e3);
+       r0   = 0.05 + 0.01*(sum(dim)/n>=1e3);
+       tol  = 5e-7*n/m/sum(dim); 
     else
-       r0    = 0.5/log10(9+k0);
+       r0   = 0.5/log10(9+k0);
     end
     if isfield(pars,'r0');    r0    = pars.r0;          end 
     if isfield(pars,'eps');   eps   = pars.eps;         end
@@ -192,12 +193,12 @@ function [m,tol,eps,m0,maxit,sigmai,sigma,wri,wrsig,funf,grad] = set_parameters(
             funf     = @(X)funcLinear(X,Ai,bi,m,n,diw);            
             for i    = 1:m
                 grad{i} = @(v)gradLineari(v,Ai{i},bi{i},diw(i)); 
-            end
+            end 
         case 'LogReg'
             funf     = @(x)funcLogist(x,Ai,bi,m,n,diw,1e-3);  
             for i    = 1:m
                 grad{i} = @(v)gradLogisti(v,Ai{i},bi{i},diw(i),1e-3); 
-            end    
+            end     
         otherwise
             fprintf( ' ''prob'' is incorrect !!!\n ''porb'' must be one of {''LinReg'',''LogReg''}\n')
     end
