@@ -31,5 +31,5 @@ end
 
 k0        = 10;
 out1      = FedADMM(dim,n,A,b,k0,prob{t},pars);   
-pt1       = PlotObj(out1.objx);
+pt1       = plotobj(out1.objx);
  
