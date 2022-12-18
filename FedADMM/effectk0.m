@@ -26,8 +26,8 @@ for i      = 1:nnz(k0)
     out{i} = FedADMM(dim,n,A,b,k0(i),prob,pars);  
 end
 
-figure('Renderer', 'painters', 'Position',[800 200 504 460]);
-axes('Position', [0.115 0.11 0.86 0.85] );  
+figure('Renderer', 'painters', 'Position',[1100 400 370 320]);
+axes('Position', [0.14 0.14 0.83 0.8]);  
 colors = {'#173f5f','#20639b','#3caea3','#f6d55c','#ed553b'};
 for i = 1 : nnz(k0)
     mi = length(1:out{i}.iter);
