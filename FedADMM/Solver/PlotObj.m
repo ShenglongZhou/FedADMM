@@ -7,5 +7,6 @@ function  PlotObj(obj,k0)
     h1.LineWidth  = 1.5;      
     h1.LineStyle  = '-';   
     h1.Color = '#3caea3';  
-    xlabel('Iterations'); ylabel('Objective');    
+    axis([1 length(y) min(obj) max(obj)])
+    xlabel('CR'); ylabel('Objective');    
 end
