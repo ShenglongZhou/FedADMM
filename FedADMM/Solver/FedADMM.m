@@ -38,8 +38,9 @@ function out = FedADMM(dim,n,A,b,k0,prob,pars)
 %   k0      : A positive integer controlling communication rounds (REQUIRED)
 %             The larger k0 is the fewer communication rounds are
 %   prob    : must be one of {'LinReg','LogReg'}                  (REQUIRED)
-%   pars  :   All parameters are OPTIONAL                                                     
-%             pars.r0    --  A positive scalar (default: 0.5 for LinReg 0.05 for LogReg) 
+%   pars  :   All parameters are OPTIONAL             
+%             pars.rho   --  Participation rate (default: 0.5)
+%             pars.r0    --  A positive scalar  (default: 0.5 for LinReg 0.05 for LogReg) 
 %                            NOTE: Increase this value if you find the solver diverges   
 %             pars.tol   --  Tolerance of the halting condition (default,1e-7)
 %             pars.maxit --  Maximum number of iterations (default,1000*k0) 
@@ -140,7 +141,12 @@ out.iter   = iter+1;
 out.time   = toc(t0);  
 out.comrnd = ceil(iter/k0);
 fprintf(' -------------------------------------------------------------\n');
-
+fprintf(' Objective:     %10.3f\n',fw); 
+fprintf(' Iteration:     %10d\n',iter);
+fprintf(' Error:         %10.2e\n',err);
+fprintf(' Time:          %7.3fsec\n',out.time);
+fprintf(' CR:            %10d\n',out.comrnd);
+fprintf(' -------------------------------------------------------------\n');
 end
 
 %Set parameters --------------------------------------------------------------------------
