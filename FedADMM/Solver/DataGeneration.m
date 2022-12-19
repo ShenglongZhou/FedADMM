@@ -35,4 +35,3 @@ switch prob
     otherwise; fprintf( ' ''prob'' is incorrect !!!\n ''porb'' must be one of {''LinReg'',''LogReg''}\n')
 end
 end
-
