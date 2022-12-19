@@ -27,11 +27,11 @@ for i      = 1:nnz(k0)
 end
 
 figure('Renderer', 'painters', 'Position',[1100 400 370 320]);
-axes('Position', [0.14 0.14 0.83 0.8]);  
+axes('Position', [0.16 0.14 0.81 0.8]);  
 colors = {'#173f5f','#20639b','#3caea3','#f6d55c','#ed553b'};
 for i = 1 : nnz(k0)
     mi = length(1:out{i}.iter);
-    pl = semilogx(1:mi,out{i}.OBJ(1:end),'-'); hold on
+    pl = plot(1:mi,out{i}.OBJ(1:end),'-'); hold on
     pl.Color     = colors{i};
     pl.LineWidth = 2; 
     leg{i} = strcat('k_0=', num2str(k0(i)));
