@@ -21,6 +21,7 @@ end
 [A,b,dim,n] = DataGeneration(prob,m,n,var1,var2); 
  
 k0         = [10:10:50];
+pars.rho   = 0.5;
 out        = cell(1,nnz(k0)); 
 for i      = 1:nnz(k0)
     out{i} = FedADMM(dim,n,A,b,k0(i),prob,pars);  
