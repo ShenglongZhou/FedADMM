@@ -19,7 +19,9 @@ switch prob
 
 end 
 
-k0          = 10;
 [A,b,dim,n] = DataGeneration(prob,m,n,var1,var2); 
+
+k0          = 10;
+pars.rho    = 0.5;
 out         = FedADMM(dim,n,A,b,k0,prob,pars);
 PlotObj(out.OBJ,k0)
