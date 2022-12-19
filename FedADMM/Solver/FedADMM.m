@@ -66,6 +66,13 @@ elseif nargin < 7
        pars   = [];  
 end
 
+d = sum(dim);
+if size(A,1)~=d  
+    fprintf(' Dimensions are not consistent !!! \n No problems will be solved!!!\n'); 
+    return;
+end
+
+
 [m,tol,eps,m0,maxit,sigmai,sigma,wri,wrsig,funf,grad] ...
          = set_parameters(dim,n,A,b,k0,prob,pars);
 Fnorm    = @(x)norm(x,'fro')^2;
@@ -140,14 +147,15 @@ end
 function [m,tol,eps,m0,maxit,sigmai,sigma,wri,wrsig,funf,grad] = set_parameters(dim,n,A,b,k0,prob,pars) 
    
     m       = length(dim);
+    d       = sum(dim);
     maxit   = 1e3*k0;    
-    tol     = 5e-3*n/m/sum(dim); 
+    tol     = 5e-3*n/m/d; 
     eps     = k0^2*ones(m,1);
     m0      = ceil(0.5*m);
     
     if isequal(prob,'LogReg') 
-       r0   = 0.05 + 0.01*(sum(dim)/n>=1e3);
-       tol  = 5e-7*n/m/sum(dim); 
+       r0   = 0.05 + 0.01*(d/n>=1e3);
+       tol  = 5e-7*n/m/d; 
     else
        r0   = 0.5/log10(9+k0);
     end
