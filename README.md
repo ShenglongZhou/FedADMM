@@ -1,2 +1,5 @@
 # FedADMM
-This Matlab package solves federated learning problems via inexact ADMM
+This Matlab package was created based on the following paper
+
+
+
