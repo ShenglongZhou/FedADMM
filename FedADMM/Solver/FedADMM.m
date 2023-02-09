@@ -53,8 +53,8 @@ function out = FedADMM(dim,n,A,b,k0,prob,pars)
 %     out.cr:       Total number of communication rounds
 % =========================================================================
 % Written by Shenglong Zhou on 12Dec2022 based on the algorithm proposed in
-%     Shenglong Zhou & Geoffrey Ye Li,
-%     Federated Learning via Inexact ADMM, arXiv:2204.10607, 2022.
+%     Shenglong Zhou & Geoffrey Ye Li, Federated Learning via Inexact ADMM, 
+%     IEEE Transactions on Pattern Analysis and Machine Intelligence, 2023.
 % Send your comments and suggestions to <<< slzhou2021@163.com >>>                                  
 % WARNING: Accuracy may not be guaranteed!!!!!  
 % =========================================================================
