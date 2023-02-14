@@ -20,7 +20,7 @@ switch prob
 end 
 [A,b,dim,n] = DataGeneration(prob,m,n,var1,var2); 
  
-k0         = [10:10:50];
+k0         = 2.^(2:6);
 pars.rho   = 0.5;
 out        = cell(1,nnz(k0)); 
 for i      = 1:nnz(k0)
