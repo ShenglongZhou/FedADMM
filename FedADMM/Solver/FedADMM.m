@@ -155,7 +155,7 @@ function [m,tol,eps,m0,maxit,sigmai,sigma,wri,wrsig,funf,grad] = set_parameters(
     m       = length(dim);
     d       = sum(dim);
     maxit   = 1e3*k0;    
-    tol     = 5e-3*n/m/d; 
+    
     eps     = k0^2*ones(m,1);
     m0      = ceil(0.5*m);
     
@@ -164,6 +164,7 @@ function [m,tol,eps,m0,maxit,sigmai,sigma,wri,wrsig,funf,grad] = set_parameters(
        tol  = 5e-7*n/m/d; 
     else
        r0   = 0.5/log10(9+k0);
+       tol  = 2e-3*n/m/d; 
     end
     if isfield(pars,'r0');    r0    = pars.r0;          end 
     if isfield(pars,'eps');   eps   = pars.eps;         end
@@ -206,12 +207,12 @@ function [m,tol,eps,m0,maxit,sigmai,sigma,wri,wrsig,funf,grad] = set_parameters(
         case 'LinReg'    
             funf     = @(X)funcLinear(X,Ai,bi,m,n,diw);            
             for i    = 1:m
-                grad{i} = @(v)gradLineari(v,Ai{i},bi{i},diw(i)); 
+                grad{i} = @(v)gradLinearClienti(v,Ai{i},bi{i},diw(i)); 
             end 
         case 'LogReg'
             funf     = @(x)funcLogist(x,Ai,bi,m,n,diw,1e-3);  
             for i    = 1:m
-                grad{i} = @(v)gradLogisti(v,Ai{i},bi{i},diw(i),1e-3); 
+                grad{i} = @(v)gradLogistClienti(v,Ai{i},bi{i},diw(i),1e-3); 
             end     
         otherwise
             fprintf( ' ''prob'' is incorrect !!!\n ''porb'' must be one of {''LinReg'',''LogReg''}\n')
@@ -236,7 +237,7 @@ function  [objX,gradX]  = funcLinear(x,Ai,bi,m,n,dim)
 end
 
 %--------------------------------------------------------------------------
-function  gradj = gradLineari(x,Ai,bi,di)  
+function  gradj = gradLinearClienti(x,Ai,bi,di)  
           gradj = ((Ai*x-bi)'* Ai)'*di;
 end
 
@@ -258,7 +259,7 @@ end
 
 
 %--------------------------------------------------------------------------
-function  gXj  = gradLogisti(x,Ai,bi,di,lam) 
+function  gXj  = gradLogistClienti(x,Ai,bi,di,lam) 
           Ax   = Ai*x;  
           eAx  = 1 + exp(Ax); 
           gXj  = ( ((1-bi-1./eAx)'*Ai)'+lam*x)*di;
